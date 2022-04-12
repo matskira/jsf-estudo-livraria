@@ -1,28 +1,53 @@
 package io.github.com.matskira.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Livro {
 
-	private String nome;
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	private String titulo;
 	private String isbn;
 	private double preco;
 	private String dataLancamento;
 
+	@ManyToMany
+	private List<Autor> autores = new ArrayList<Autor>();
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void adicionaAutor(Autor autor) {
+		this.autores.add(autor);
+	}
+
 	public Livro() {
 	}
 
-	public Livro(String nome, String isbn, double preco, String dataLancamento) {
-		this.nome = nome;
-		this.isbn = isbn;
-		this.preco = preco;
-		this.dataLancamento = dataLancamento;
+	public Integer getId() {
+		return id;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getIsbn() {
