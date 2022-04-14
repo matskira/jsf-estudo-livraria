@@ -4,10 +4,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head/>
+
 <h:body>
 	<h1>Novo Livro</h1>
 	<h:form>
-		<h:messages />
+		<h:messages id="messages" />
 		<fieldset>
 			<legend>Dados do Livro</legend>
 			<h:panelGrid columns="2">
@@ -16,13 +18,16 @@
 					requiredMessage="Campo título é obtrigatório"
 					validatorMessage="Tamanho máximo de caracteres no título é de 40"
 					id="titulo" value="#{livroBean.livro.titulo}">
-
+	
 					<f:validateLength maximum="40" />
+					<f:ajax event="blur" render="messages"/>
 				</h:inputText>
 
 				<h:outputLabel value="ISBN:" for="isbn" />
 				<h:inputText id="isbn" value="#{livroBean.livro.isbn}"
-					validator="#{livroBean.validacaoISBN}" />
+					validator="#{livroBean.validacaoISBN}" >
+					<f:ajax event="keyup" render="messages"/>	
+				</h:inputText>
 
 				<h:outputLabel value="Preço:" for="preco" />
 				<h:inputText id="preco" value="#{livroBean.livro.preco}"
@@ -40,13 +45,15 @@
 		<fieldset>
 			<legend>Dados do autor</legend>
 			<h:outputLabel value="Selecione um autor" for="autor" />
-			<h:selectOneMenu value="#{livroBean.autorId}">
+			<h:selectOneMenu value="#{livroBean.autorId}" id="autor">
 				<f:selectItems value="#{livroBean.autores}" var="autor"
 					itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
 			</h:selectOneMenu>
 			<h:commandButton value="Gravar Autor"
-				action="#{livroBean.gravarAutor}" />
-			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor">
+				action="#{livroBean.gravarAutor}" >
+				<f:ajax execute="autor" render="tabelaAutor"/>	
+			</h:commandButton>
+			<h:dataTable id="tabelaAutor" value="#{livroBean.autoresDoLivro}" var="autor">
 				<h:column>
 					<h:outputText value="#{autor.nome}" />
 				</h:column>
@@ -55,7 +62,7 @@
 		<fieldset>
 			<legend>Tabela de Livros</legend>
 			<h:dataTable id="tabelaLivros" value="#{livroBean.livros}"
-				var="livro">
+				var="livro" >
 				<h:column>
 					<f:facet name="header">Título</f:facet>
 					<h:outputLabel value="#{livro.titulo}" />
@@ -76,7 +83,9 @@
 				</h:column>
 			</h:dataTable>
 		</fieldset>
-		<h:commandButton value="Gravar" action="#{livroBean.gravar}" />
+		<h:commandButton value="Gravar" action="#{livroBean.gravar}" >
+			<f:ajax execute="@form" render="@form tabelaLivros"/>
+		</h:commandButton>
 	</h:form>
 </h:body>
 </html>
