@@ -1,1 +1,16 @@
-/build/
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Compiled Files
+*.class
+bin/
+build/
+/bin1/
+java/build/**
