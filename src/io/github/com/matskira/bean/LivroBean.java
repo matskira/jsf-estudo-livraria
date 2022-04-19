@@ -70,6 +70,12 @@ public class LivroBean {
 		this.livro = new Livro();
 	}
 	
+	public void remover(Livro livro) {
+		System.out.println("Removendo livro " + livro.getTitulo());
+		new DAO<Livro>(Livro.class).remove(livro);
+		this.livros.remove(livro);
+	}
+	
 	public void validacaoISBN(FacesContext fc, UIComponent component, Object object) throws ValidatorException{
 		String valor = object.toString();
 		if (!valor.startsWith("1")) {
