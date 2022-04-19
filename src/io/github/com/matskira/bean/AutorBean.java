@@ -1,11 +1,13 @@
 package io.github.com.matskira.bean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import io.github.com.matskira.dao.DAO;
 import io.github.com.matskira.model.Autor;
 
 @ManagedBean
+@ViewScoped
 public class AutorBean {
 
 	private Autor autor = new Autor();
