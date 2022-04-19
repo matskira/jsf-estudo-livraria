@@ -24,8 +24,12 @@ public class LivroBean {
 	
 	private List<Autor> autoresDoLivro = new ArrayList<Autor>();
 
+	private Integer livroId;
+	
 	private List<Livro> livros = new ArrayList<Livro>();
 	
+	private Integer autorId;
+
 	public List<Livro> getLivros() {
 		return new DAO<Livro>(Livro.class).listaTodos();
 	}
@@ -34,7 +38,13 @@ public class LivroBean {
 		return this.getLivro().getAutores();
 	}
 
-	private Integer autorId;
+	public Integer getLivroId() {
+		return livroId;
+	}
+
+	public void setLivroId(Integer livroId) {
+		this.livroId = livroId;
+	}
 
 	public List<Autor> getAutores() {
 		return autores;
@@ -99,6 +109,10 @@ public class LivroBean {
 		if (!valor.startsWith("1")) {
 			throw new ValidatorException(new FacesMessage("Campo ISBN deveria começar com 1"));
 		}
+	}
+	
+	public void carregarLivroPelaId() {
+	    this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livroId);
 	}
 
 }
