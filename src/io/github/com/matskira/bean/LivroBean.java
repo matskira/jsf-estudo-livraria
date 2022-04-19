@@ -64,8 +64,13 @@ public class LivroBean {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor"));
 			return;
 		}
+		
+		if (this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
+		}else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);			
+		}
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
 		
 		this.livro = new Livro();
 	}
@@ -74,6 +79,11 @@ public class LivroBean {
 		System.out.println("Removendo livro " + livro.getTitulo());
 		new DAO<Livro>(Livro.class).remove(livro);
 		this.livros.remove(livro);
+	}
+	
+	public void carregar(Livro livro) {
+		System.out.println("Carregando livro "+ livro.getTitulo());
+		this.livro = livro;
 	}
 	
 	public void validacaoISBN(FacesContext fc, UIComponent component, Object object) throws ValidatorException{

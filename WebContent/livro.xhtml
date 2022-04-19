@@ -93,6 +93,10 @@
 							<h:commandLink value="Remover"
 								action="#{livroBean.remover(livro)}"/>
 						</h:column>
+						<h:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink value="Alterar" action="#{livroBean.carregar(livro)}"/>
+						</h:column>
 					</h:dataTable>
 				</h:form>
 			</fieldset>
