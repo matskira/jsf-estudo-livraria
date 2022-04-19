@@ -86,6 +86,10 @@ public class LivroBean {
 		this.livro = livro;
 	}
 	
+	public void removerAutorDoLivro(Autor autor) {
+		this.livro.removeAutor(autor);
+	}
+	
 	public void validacaoISBN(FacesContext fc, UIComponent component, Object object) throws ValidatorException{
 		String valor = object.toString();
 		if (!valor.startsWith("1")) {

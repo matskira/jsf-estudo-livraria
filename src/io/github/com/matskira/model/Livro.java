@@ -79,5 +79,8 @@ public class Livro {
 		this.dataLancamento = dataLancamento;
 	}
 
+	public void removeAutor(Autor autor) {
+	    this.autores.remove(autor);        
+	}
 	
 }

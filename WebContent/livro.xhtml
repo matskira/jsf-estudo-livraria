@@ -62,6 +62,11 @@
 					<h:column>
 						<h:outputText value="#{autor.nome}" />
 					</h:column>
+					<h:column>
+						<h:commandLink value="X" action="#{livroBean.removerAutorDoLivro(autor)}">
+							<f:ajax execute="autor" render="tabelaAutor" />
+						</h:commandLink>
+					</h:column>
 				</h:dataTable>
 			</fieldset>
 			</h:form>
